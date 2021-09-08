@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210907172221_InitialCreate")]
+    [Migration("20210908163026_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,24 @@ namespace Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Photos");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Mapping.Referals", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("DistributorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ReferalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Referals");
                 });
 
             modelBuilder.Entity("Domain.Entities.Distributors.AddressInfo", b =>

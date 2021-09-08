@@ -23,6 +23,20 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Referals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DistributorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReferalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Referals", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AddressInfos",
                 columns: table => new
                 {
@@ -149,6 +163,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Photos");
+
+            migrationBuilder.DropTable(
+                name: "Referals");
 
             migrationBuilder.DropTable(
                 name: "Distributors");

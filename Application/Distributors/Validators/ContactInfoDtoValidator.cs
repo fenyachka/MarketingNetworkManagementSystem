@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Distributors;
+﻿using Application.Distributors.DTO;
+using Domain.Entities.Distributors;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Application.Distributors.Validators
 {
-    public class ContactInfoValidator : AbstractValidator<ContactInfo>
+    public class ContactInfoDtoValidator : AbstractValidator<ContactInfoDto>
     {
-        public ContactInfoValidator()
+        public ContactInfoDtoValidator()
         {
             RuleFor(p => p.ContactType).NotNull().NotEmpty();
             RuleFor(p => p.ContactDetails).NotNull().NotEmpty().MaximumLength(100);

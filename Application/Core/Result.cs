@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Core
 {
-    class Result<T>
+    public class Result<T>
     {
         public bool IsSuccess { get; set; }
         public T Value { get; set; }

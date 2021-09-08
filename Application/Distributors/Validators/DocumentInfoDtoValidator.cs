@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Distributors;
+﻿using Application.Distributors.DTO;
+using Domain.Entities.Distributors;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Application.Distributors.Validators
 {
-    public class DocumentInfoValidator : AbstractValidator<DocumentInfo>
+    public class DocumentInfoDtoValidator : AbstractValidator<DocumentInfoDto>
     {
-        public DocumentInfoValidator()
+        public DocumentInfoDtoValidator()
         {
             RuleFor(p => p.DocumentType).NotNull().NotEmpty();
             RuleFor(p => p.Seria).MaximumLength(10);

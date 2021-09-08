@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Entities.Distributors;
+using Domain.Entities.Mapping;
+using Domain.Interfaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,10 +15,28 @@ namespace Infrastructure.Data
     {
         private readonly DataContext _context;
         private Hashtable _repositories;
+        public IRepository<Distributor> Distributor { get; }
+        public IRepository<AddressInfo> AddressInfo { get; }
+        public IRepository<ContactInfo> ContactInfo { get; }
+        public IRepository<DocumentInfo> DocumentInfo { get; }
+        public IRepository<Photo> Photo { get; }
+        public IRepository<Referals> Referals { get; }
 
-        public UnitOfWork(DataContext context)
+        public UnitOfWork(DataContext context,
+            IRepository<Distributor> distributor,
+        IRepository<AddressInfo> addressInfo,
+        IRepository<ContactInfo> contactInfo,
+        IRepository<DocumentInfo> documentInfo,
+        IRepository<Photo> photo,
+        IRepository<Referals> referals)
         {
             _context = context;
+            Distributor = distributor;
+            AddressInfo = addressInfo;
+            ContactInfo = contactInfo;
+            DocumentInfo = documentInfo;
+            Photo = photo;
+            Referals = referals;
         }
 
         public void Dispose()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Core
 {
-    class PagingParams
+    public class PagingParams
     {
         private const int MaxPageSize = 50;
         public int PageNumber { get; set; } = 1;

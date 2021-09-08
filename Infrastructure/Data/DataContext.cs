@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Distributors;
+using Domain.Entities.Mapping;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Infrastructure.Data
         public DbSet<ContactInfo> ContactInfos { get; set; }
         public DbSet<DocumentInfo> DocumentInfos { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Referals> Referals { get; set; }
      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

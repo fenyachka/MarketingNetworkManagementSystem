@@ -169,6 +169,24 @@ namespace Infrastructure.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Mapping.Referals", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("DistributorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ReferalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Referals");
+                });
+
             modelBuilder.Entity("Domain.Entities.Distributors.AddressInfo", b =>
                 {
                     b.HasOne("Domain.Entities.Distributors.Distributor", "Distributor")
