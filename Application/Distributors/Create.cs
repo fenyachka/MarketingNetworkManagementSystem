@@ -3,6 +3,7 @@ using Application.Distributors.DTO;
 using Application.Distributors.Validators;
 using AutoMapper;
 using Domain.Entities.Distributors;
+using Domain.Entities.Mapping;
 using Domain.Interfaces;
 using FluentValidation;
 using MediatR;
@@ -17,7 +18,7 @@ namespace Application.Distributors
 {
     public class Create
     {
-        public class Command:IRequest<Result<Unit>>
+        public class Command : IRequest<Result<Unit>>
         {
             public CreateDistributorDto CreateDistributorDto { get; set; }
 
@@ -43,7 +44,54 @@ namespace Application.Distributors
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+                var existingCheck = _unitOfWork.Distributor
+                    .Include(x => x.DocumentInfo)
+                    .Where(x => x.DocumentInfo.PrivateNumber == request.CreateDistributorDto.DocumentInfo.PrivateNumber)
+                    .FirstOrDefault();
+
+                if (existingCheck != null)
+                {
+                    if (existingCheck.DateDeleted!=null)
+                    {
+                        return Result<Unit>.Failure("Distributor with such Private Number was deleted from database.");
+                    }
+                    return Result<Unit>.Failure("Distributor with such Private Number already exists.");
+                }
+
                 var distributor = _mapper.Map<CreateDistributorDto, Distributor>(request.CreateDistributorDto);
+                distributor.Id = Guid.NewGuid();
+
+                if (string.IsNullOrWhiteSpace(request.CreateDistributorDto.ReferalId.ToString()))
+                {
+                    distributor.HierarchyLevel = 1;
+                }
+                else
+                {
+                    var parentId = Guid.Parse(request.CreateDistributorDto.ReferalId.ToString());
+
+                    var referals = _unitOfWork.Referals.TableNoTracking.Where(x => x.DistributorId == parentId).ToList();
+
+                    if (referals.Count < 3)
+                    {
+                        var parentLevel = _unitOfWork.Distributor.TableNoTracking.FirstOrDefault(x => x.Id == parentId).HierarchyLevel;
+                        if (parentLevel < 5)
+                        {
+                            distributor.HierarchyLevel = ++parentLevel;
+
+                            var refer = new Referals
+                            {
+                                DistributorId = Guid.Parse(request.CreateDistributorDto.ReferalId.ToString()),
+                                ReferalId = distributor.Id
+                            };
+
+                            _unitOfWork.Referals.Add(refer);
+                        }
+                        else
+                            return Result<Unit>.Failure("Distributor can't be registered.");
+                    }
+                    else
+                        return Result<Unit>.Failure("Distributor can't be registered.");
+                }
 
                 _unitOfWork.Distributor.Add(distributor);
 

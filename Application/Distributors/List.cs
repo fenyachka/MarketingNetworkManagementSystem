@@ -2,6 +2,7 @@
 using Application.Distributors.DTO;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain.Entities.Distributors;
 using Domain.Interfaces;
 using MediatR;
 using System;
@@ -32,8 +33,9 @@ namespace Application.Distributors
 
             public async Task<Result<PagedList<DistributorToReturnDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var query = _unitOfWork.Distributor.TableNoTracking
-                    .ProjectTo<DistributorToReturnDto>(_mapper.ConfigurationProvider)
+                var query = _unitOfWork.Distributor
+                    .Include(x =>x.AddressInfo, y=>y.ContactInfo,z=>z.DocumentInfo)
+                    .Where(x=>x.DateDeleted==null)
                     .AsQueryable();
 
                 if (!string.IsNullOrWhiteSpace(request.Params.FirstName))
@@ -41,8 +43,12 @@ namespace Application.Distributors
                     query = query.Where(x => x.FirstName == request.Params.FirstName);
                 }
 
-                return Result<PagedList<DistributorToReturnDto>>.Success(
-                    await PagedList<DistributorToReturnDto>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize));
+
+                var data = await PagedList<Distributor>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize);
+
+                var result = new PagedList<DistributorToReturnDto>(data.Select(_mapper.Map<Distributor, DistributorToReturnDto>), data.TotalCount, data.CurrentPage, data.PageSize);
+
+                return Result<PagedList<DistributorToReturnDto>>.Success(result);
             }
         }
     }

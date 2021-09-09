@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210908163026_InitialCreate")]
+    [Migration("20210909161634_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,6 +84,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DateDeleted")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -91,6 +94,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<bool>("Gender")
                         .HasColumnType("bit");
+
+                    b.Property<int>("HierarchyLevel")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()

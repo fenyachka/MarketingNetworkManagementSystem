@@ -16,6 +16,8 @@ namespace Domain.Entities.Distributors
         public DocumentInfo DocumentInfo { get; set; }
         public ContactInfo ContactInfo { get; set; }
         public AddressInfo AddressInfo { get; set; }
+        public int HierarchyLevel { get; set; }
+        public DateTime? DateDeleted { get; set; }
 
     }
 }

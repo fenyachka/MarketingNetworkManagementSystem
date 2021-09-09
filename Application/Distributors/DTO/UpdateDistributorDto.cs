@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Distributors.DTO
 {
-    public class CreateDistributorDto
+    public class UpdateDistributorDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -15,6 +15,5 @@ namespace Application.Distributors.DTO
         public DocumentInfoDto DocumentInfo { get; set; }
         public ContactInfoDto ContactInfo { get; set; }
         public AddressInfoDto AddressInfo { get; set; }
-        public Guid? ReferalId { get; set; }
     }
 }

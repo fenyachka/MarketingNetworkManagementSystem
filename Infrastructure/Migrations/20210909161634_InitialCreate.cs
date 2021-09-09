@@ -15,7 +15,9 @@ namespace Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<bool>(type: "bit", nullable: false)
+                    Gender = table.Column<bool>(type: "bit", nullable: false),
+                    HierarchyLevel = table.Column<int>(type: "int", nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
