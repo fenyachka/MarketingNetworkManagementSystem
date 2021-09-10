@@ -1,7 +1,11 @@
 ﻿using Application.Distributors.DTO;
 using Application.Helpers;
+using Application.Orders.DTO;
+using Application.Products.DTO;
 using AutoMapper;
 using Domain.Entities.Distributors;
+using Domain.Entities.Orders;
+using Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +31,11 @@ namespace Application.Core
             CreateMap<ContactInfoDto, ContactInfo>();
 
             CreateMap<UpdateDistributorDto, Distributor>();
+
+            CreateMap<ProductDto, Product>();
+            CreateMap<Order, OrderDto>()
+                .ForMember(x => x.DistributorId, y => y.MapFrom(z => z.DistributorId))
+                .ForMember(x => x.OrderItems, y => y.MapFrom(z => z.OrderItems));
         }
 
      

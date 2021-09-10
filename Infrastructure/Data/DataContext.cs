@@ -1,5 +1,7 @@
 ﻿using Domain.Entities.Distributors;
 using Domain.Entities.Mapping;
+using Domain.Entities.Orders;
+using Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,11 @@ namespace Infrastructure.Data
         public DbSet<DocumentInfo> DocumentInfos { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Referals> Referals { get; set; }
-     
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

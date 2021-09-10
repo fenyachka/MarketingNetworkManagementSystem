@@ -1,5 +1,7 @@
 ﻿using Domain.Entities.Distributors;
 using Domain.Entities.Mapping;
+using Domain.Entities.Orders;
+using Domain.Entities.Products;
 using Domain.Interfaces;
 using System;
 using System.Collections;
@@ -21,6 +23,9 @@ namespace Infrastructure.Data
         public IRepository<DocumentInfo> DocumentInfo { get; }
         public IRepository<Photo> Photo { get; }
         public IRepository<Referals> Referals { get; }
+        public IRepository<Product> Product { get; }
+        public IRepository<Order> Order { get; }
+        public IRepository<OrderItem> OrderItem { get; }
 
         public UnitOfWork(DataContext context,
             IRepository<Distributor> distributor,
@@ -28,7 +33,10 @@ namespace Infrastructure.Data
         IRepository<ContactInfo> contactInfo,
         IRepository<DocumentInfo> documentInfo,
         IRepository<Photo> photo,
-        IRepository<Referals> referals)
+        IRepository<Referals> referals,
+        IRepository<Product> product,
+        IRepository<Order> order,
+        IRepository<OrderItem> orderItem)
         {
             _context = context;
             Distributor = distributor;
@@ -37,6 +45,9 @@ namespace Infrastructure.Data
             DocumentInfo = documentInfo;
             Photo = photo;
             Referals = referals;
+            Product = product;
+            Order = order;
+            OrderItem = orderItem;
         }
 
         public void Dispose()

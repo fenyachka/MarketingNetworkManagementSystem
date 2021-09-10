@@ -9,8 +9,8 @@ namespace Domain.Entities.Orders
     public class Order:BaseEntity<Guid>
     {
         public Guid DistributorId { get; set; }
-        public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
-        public IReadOnlyList<OrderItem> OrderItems { get; set; }
+        public DateTime OrderDate { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
         public decimal Total { get; set; }
     }
 }

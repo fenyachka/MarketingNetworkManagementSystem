@@ -1,5 +1,7 @@
 ﻿using Domain.Entities.Distributors;
 using Domain.Entities.Mapping;
+using Domain.Entities.Orders;
+using Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,9 @@ namespace Domain.Interfaces
         IRepository<DocumentInfo> DocumentInfo { get; }
         IRepository<Photo> Photo { get; }
         IRepository<Referals> Referals { get; }
+        IRepository<Product> Product { get; }
+        IRepository<Order> Order { get; }
+        IRepository<OrderItem> OrderItem { get; }
 
 
 

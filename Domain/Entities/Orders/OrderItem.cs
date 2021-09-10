@@ -9,18 +9,10 @@ namespace Domain.Entities.Orders
 {
     public class OrderItem : BaseEntity<int>
     {
-        public OrderItem()
-        {
-
-        }
-
-        public OrderItem(Product product, int quantity)
-        {
-            Product = product;
-            Quantity = quantity;
-        }
-
-        public Product Product { get; set; }
+        public int ProductId { get; set; }
         public int Quantity { get; set; }
+
+        public Guid OrderId { get; set; }
+        public Order Order { get; set; }
     }
 }
