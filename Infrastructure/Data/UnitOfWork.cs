@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Distributors;
+﻿using Domain.Entities.Bonuses;
+using Domain.Entities.Distributors;
 using Domain.Entities.Mapping;
 using Domain.Entities.Orders;
 using Domain.Entities.Products;
@@ -26,6 +27,7 @@ namespace Infrastructure.Data
         public IRepository<Product> Product { get; }
         public IRepository<Order> Order { get; }
         public IRepository<OrderItem> OrderItem { get; }
+        public IRepository<Bonus> Bonus { get; }
 
         public UnitOfWork(DataContext context,
             IRepository<Distributor> distributor,
@@ -36,7 +38,8 @@ namespace Infrastructure.Data
         IRepository<Referals> referals,
         IRepository<Product> product,
         IRepository<Order> order,
-        IRepository<OrderItem> orderItem)
+        IRepository<OrderItem> orderItem,
+        IRepository<Bonus> bonus)
         {
             _context = context;
             Distributor = distributor;
@@ -48,6 +51,7 @@ namespace Infrastructure.Data
             Product = product;
             Order = order;
             OrderItem = orderItem;
+            Bonus = bonus;
         }
 
         public void Dispose()

@@ -31,26 +31,21 @@ namespace Application.Orders
             {
                 var orderId = Guid.NewGuid();
 
-                var productIds = request.OrderDto.OrderItems.Select(x => x.ProductId);
+                var list = _unitOfWork.Product.Table.Where(x => request.OrderDto.OrderItems.Select(y => y.ProductId).Contains(x.Id)).ToList();
 
-                var total = (from product in _unitOfWork.Product.TableNoTracking
-                             join dto in request.OrderDto.OrderItems
-                             on product.Id equals dto.ProductId
-                             select new
-                             {
-                                 Price = product.Price,
-                                 Quantity = dto.Quantity
-                             }).AsEnumerable();
-                             
-                             var x= total.Sum(x => x.Price * x.Quantity);
+                decimal totalPrice = 0;
+                foreach (var item in request.OrderDto.OrderItems)
+                {
+                    totalPrice += item.Quantity * list.First(x => x.Id == item.ProductId).Price;
 
+                }
 
                 var order = new Order()
                 {
                     Id = orderId,
                     DistributorId = request.OrderDto.DistributorId,
                     OrderDate = DateTime.Now,
-                    Total = x
+                    Total = totalPrice
                 };
 
                 foreach (var item in request.OrderDto.OrderItems)

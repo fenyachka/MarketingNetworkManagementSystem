@@ -1,4 +1,6 @@
-﻿using Domain.Entities.Distributors;
+﻿
+using Domain.Entities.Bonuses;
+using Domain.Entities.Distributors;
 using Domain.Entities.Mapping;
 using Domain.Entities.Orders;
 using Domain.Entities.Products;
@@ -25,6 +27,7 @@ namespace Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Bonus> Bonus { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

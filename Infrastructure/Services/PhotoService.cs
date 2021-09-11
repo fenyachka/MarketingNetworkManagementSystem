@@ -18,7 +18,7 @@ namespace Infrastructure.Services
             if (file.Length > 0)
             {
                 var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                var filePath = Path.Combine("Content/images/distributors", fileName);
+                var filePath = Path.Combine("wwwroot/images/distributors", fileName);
                 await using var fileStream = new FileStream(filePath, FileMode.Create);
                 await file.CopyToAsync(fileStream);
                 photo.FileName = fileName;
@@ -29,9 +29,9 @@ namespace Infrastructure.Services
         }
         public void DeleteFromDisk(Photo photo)
         {
-            if (File.Exists(Path.Combine("Content/images/distributors", photo.FileName)))
+            if (File.Exists(Path.Combine("wwwroot/images/distributors", photo.FileName)))
             {
-                File.Delete("Content/images/distributors/" + photo.FileName);
+                File.Delete("wwwroot/images/distributors/" + photo.FileName);
             }
         }
 

@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\placeholder.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -19,6 +15,14 @@
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\distributors\0529d15f-ff61-4a0b-aa82-3f3fa9eb6839.jpg" />
+    <None Include="wwwroot\images\distributors\0d0d3024-1b94-42f4-8c44-61b957d025af.jpg" />
+    <None Include="wwwroot\images\distributors\d3a56c88-8968-48ce-a6a0-3da272fb137f.jpg" />
+    <None Include="wwwroot\images\distributors\e5786264-1cea-4415-a27a-9a3589fbbf61.jpg" />
+    <None Include="wwwroot\images\placeholder.png" />
   </ItemGroup>
 
 </Project>

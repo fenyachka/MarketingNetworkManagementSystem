@@ -1,4 +1,6 @@
-﻿using Domain.Entities.Distributors;
+﻿
+using Domain.Entities.Bonuses;
+using Domain.Entities.Distributors;
 using Domain.Entities.Mapping;
 using Domain.Entities.Orders;
 using Domain.Entities.Products;
@@ -24,6 +26,7 @@ namespace Domain.Interfaces
         IRepository<Product> Product { get; }
         IRepository<Order> Order { get; }
         IRepository<OrderItem> OrderItem { get; }
+        IRepository<Bonus> Bonus { get; }
 
 
 

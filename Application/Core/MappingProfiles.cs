@@ -36,6 +36,7 @@ namespace Application.Core
             CreateMap<Order, OrderDto>()
                 .ForMember(x => x.DistributorId, y => y.MapFrom(z => z.DistributorId))
                 .ForMember(x => x.OrderItems, y => y.MapFrom(z => z.OrderItems));
+            CreateMap<OrderItem, OrderItemDto>();
         }
 
      

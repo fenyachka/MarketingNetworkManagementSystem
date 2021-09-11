@@ -8,6 +8,22 @@ namespace Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Bonus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DistributorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BonusTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bonus", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Distributors",
                 columns: table => new
                 {
@@ -211,6 +227,9 @@ namespace Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AddressInfos");
+
+            migrationBuilder.DropTable(
+                name: "Bonus");
 
             migrationBuilder.DropTable(
                 name: "ContactInfos");

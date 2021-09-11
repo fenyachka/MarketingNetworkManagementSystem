@@ -33,5 +33,11 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id}));
         }
+
+        [HttpPut("{id}/photo")]
+        public async Task<IActionResult> AddDistributorPhoto(Guid id, [FromForm] DistributorPhotoDto photoDto)
+        {
+            return HandleResult(await Mediator.Send(new AddPhoto.Command { Id = id, PhotoDto = photoDto }));
+        }
     }
 }

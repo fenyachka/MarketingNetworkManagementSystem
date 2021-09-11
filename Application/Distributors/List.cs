@@ -34,7 +34,7 @@ namespace Application.Distributors
             public async Task<Result<PagedList<DistributorToReturnDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var query = _unitOfWork.Distributor
-                    .Include(x =>x.AddressInfo, y=>y.ContactInfo,z=>z.DocumentInfo)
+                    .Include(x =>x.AddressInfo, y=>y.ContactInfo,z=>z.DocumentInfo, w=>w.Photo)
                     .Where(x=>x.DateDeleted==null)
                     .AsQueryable();
 
@@ -43,6 +43,10 @@ namespace Application.Distributors
                     query = query.Where(x => x.FirstName == request.Params.FirstName);
                 }
 
+                if (!string.IsNullOrWhiteSpace(request.Params.LastName))
+                {
+                    query = query.Where(x => x.LastName == request.Params.LastName);
+                }
 
                 var data = await PagedList<Distributor>.CreateAsync(query, request.Params.PageNumber, request.Params.PageSize);
 
