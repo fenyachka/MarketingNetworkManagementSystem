@@ -49,20 +49,20 @@ namespace Application.Bonus
                     {
                         var bonus = item.Total * (decimal)0.1;
 
-                        var firstLevelReferals = _unitOfWork.Referals.TableNoTracking.Where(x => x.ReferalId == item.DistributorId).ToList();
+                        var firstLevelReferals = _unitOfWork.Referals.TableNoTracking.Where(x => x.DistributorId == item.DistributorId).ToList();
 
                         if (firstLevelReferals.Count > 0)
                         {
                             foreach (var referal in firstLevelReferals)
                             {
-                                bonus += totalBydistributorId.First(x => x.DistributorId == referal.DistributorId).Total * (decimal)0.05;
+                                bonus += totalBydistributorId.First(x => x.DistributorId == referal.ReferalId).Total * (decimal)0.05;
 
-                                var secondLevelReferals = _unitOfWork.Referals.TableNoTracking.Where(x => x.ReferalId == referal.DistributorId).ToList();
+                                var secondLevelReferals = _unitOfWork.Referals.TableNoTracking.Where(x => x.DistributorId == referal.DistributorId).ToList();
                                 if (secondLevelReferals.Count > 0)
                                 {
                                     foreach (var referalSecondLevel in secondLevelReferals)
                                     {
-                                        bonus += totalBydistributorId.First(x => x.DistributorId == referalSecondLevel.DistributorId).Total * (decimal)0.01;
+                                        bonus += totalBydistributorId.First(x => x.DistributorId == referalSecondLevel.ReferalId).Total * (decimal)0.01;
                                     }
                                 }
                             }
