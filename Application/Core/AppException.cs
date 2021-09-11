@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Core
 {
-    class AppException
+    public class AppException
     {
         public AppException(int statusCode, string message, string details = null)
         {
